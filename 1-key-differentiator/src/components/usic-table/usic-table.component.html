@@ -1,0 +1,185 @@
+<ng-container *ngIf="!printPreview else printableTable">
+
+<table-toolbar [parent]="self"
+               (changeColumns)="onChangeColumns($event)"
+               (cancelClicked)="cancelClicked.emit()">
+
+  <!--<div class="mat-caption" [ngClass]="{ 'bg-usic-red' : !editComponent}">
+
+    {{ editComponent?.name || 'No editComponent' }}
+
+  </div>-->
+  <ng-content></ng-content>
+
+</table-toolbar>
+
+<global-filter *ngIf="filtering === 'global'" [parent]="self"></global-filter>
+
+<div class="table-wrapper"
+     [ngClass]="tableClass + ' page-size-' + tableSize">
+
+  <lib-usic-table-resize #tableResizeComponent
+                         [columns]="displayedColumns"
+                         [persistColumns]="persistColumns"
+                         (isResizing)="isResizing=$event">
+
+    <mat-table class="usic-table"
+      [ngClass]="{'border-left': printPreview}"
+      [ngStyle]="{ width: customWidth ? customWidth : 'auto' }"
+      [dataSource]="dataSource"
+      matSort [matSortDisabled]="isResizing" (matSortChange)="changeSort.emit($event)"
+      matTableExporter [hiddenColumns]="hiddenColumns"
+      #exporter="matTableExporter">
+
+      <!-- Column Definitions -->
+      <ng-container
+        *ngFor="let column of displayedColumns; let i = index"
+        matColumnDef="{{column.icon || column.name}}"
+        [sticky]="column.sticky">
+
+        <!-- Checkbox Column (Row Select Boxes) -->
+        <ng-container *ngIf="(column.name === 'select') else normalColumn">
+
+          <!-- Checkbox Header Cell -->
+          <mat-header-cell class="bg-usic-surface-light border-right" *matHeaderCellDef>
+
+            <checkbox-header [parent]="self"></checkbox-header>
+
+          </mat-header-cell>
+
+          <!-- Checkbox Cell -->
+          <mat-cell class="border-right" *matCellDef="let row" (click)="$event.stopPropagation()" fxFlex="none">
+            <mat-checkbox
+              (click)="$event.stopPropagation()"
+              (change)="$event ? toggleRow(row) : null"
+              [checked]="selectionModel.isSelected(row)">
+            </mat-checkbox>
+          </mat-cell>
+
+          <ng-container *ngIf="hasFooter">
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+          </ng-container>
+
+        </ng-container>
+
+        <!-- Normal Column -->
+        <ng-template #normalColumn>
+
+          <!-- Normal Header Cell -->
+          <mat-header-cell
+            class="bg-usic-surface-light border-right" *matHeaderCellDef
+            mat-sort-header="{{ column.sortName !== 'none' ? (column.sortName || column.filterName || column.name) : '' }}"
+            disabled="{{ column.sortName === 'none' }}"
+            [ngClass]="{
+                        'column-filters' : filtering === 'column' && expandFilters,
+                        'numeric' : ['number','currency','date','monthYear'].includes(column.type),
+                        'icon' : column.type === 'icon',
+                        'border-top' : printPreview
+                        }"
+            [ngStyle]="{ width: column.width + 'px' }"
+            [hidden]="column.hidden || (column.hideMobile && isMobile)">
+
+            <normal-header [column]="column" [parent]="self"></normal-header>
+
+            <div class="resize-handle right"
+                 (mousedown)="tableResizeComponent.onResizeColumn($event, i)"></div>
+
+          </mat-header-cell>
+
+          <!-- Normal Cell -->
+          <mat-cell class="border-right" *matCellDef="let element"
+                    [ngClass]="{
+                      'numeric' : ['number','currency','date','monthYear'].includes(column.type),
+                      'icon' : column.type === 'icon'
+                    }"
+                    [ngStyle]="{ width: column.width + 'px' }"
+                    [hidden]="column.hidden || (column.hideMobile && isMobile)">
+
+            <normal-cell [column]="column" [element]="element" [parent]="self"></normal-cell>
+
+          </mat-cell>
+
+          <ng-container *ngIf="hasFooter">
+            <mat-footer-cell *matFooterCellDef class="numeric bg-usic-surface-light"
+              [ngStyle]="{ width: column.width + 'px' }"
+              [hidden]="column.hidden || (column.hideMobile && isMobile)">
+              <ng-container *ngIf="hasTotalForColumn(column.name)">Total: {{ getTotalForColumn(column.name) | currency }}</ng-container>
+            </mat-footer-cell>
+          </ng-container>
+
+        </ng-template>
+
+      </ng-container>
+
+      <!-- Row Definitions -->
+      <mat-header-row *matHeaderRowDef="columnNames; sticky: true"></mat-header-row>
+
+      <mat-row *matRowDef="let row; columns: columnNames;"
+               (click)="onRowClick($event, row)"
+               (dblclick)="onRowDblClick($event, row)"
+               [ngClass]="setClasses(row)"></mat-row>
+
+      <ng-container *ngIf="hasFooter">
+        <mat-footer-row *matFooterRowDef="columnNames; sticky: true"></mat-footer-row>
+      </ng-container>
+
+    </mat-table>
+
+  </lib-usic-table-resize>
+
+</div>
+
+</ng-container>
+
+<ng-template #printableTable>
+
+  <table class="border">
+    <thead>
+      <tr class="mat-header-row">
+        <th *ngFor="let column of printableColumns" class="border padding">
+          {{ column.title || (column.name | titleize) }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of dataSource.filteredData">
+        <td *ngFor="let column of printableColumns" class="border padding"
+            [ngClass]="{'numeric' : ['number','currency','date','monthYear'].includes(column.type) }">
+            {{ row | resolve:(column.name) | dataFormatter: column.type: (dataSource?.filter ? dataSource.filter[column.filterName || column.name] : undefined) }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</ng-template>
+
+<div class="usic-paginator">
+
+  <mat-paginator [pageSize]="printPreview ? (resultCount | async) : pageSize" [length]="resultCount | async"
+                 [pageSizeOptions]="[5, 10, 25, 100]">
+  </mat-paginator>
+
+  <div class="mat-paginator page-count bg-usic-surface-light border-bottom" *ngIf="pageCount" fxLayoutAlign="end">
+
+    <div fxLayoutGap=".5rem">
+
+      <label class="page-label" for="page">Page: </label>
+      <div fxFlex fxLayoutAlign="start start">
+
+        <div>
+
+          <input matNativeControl id="page" type="number"
+                 min=1 [max]="pageCount"
+                 [value]="page + 1" (change)="page = $event.target.value - 1">
+
+        </div>
+
+        <div>&nbsp; of {{pageCount}}</div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+

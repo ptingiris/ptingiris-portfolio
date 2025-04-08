@@ -1,0 +1,26 @@
+mat-toolbar {
+  padding : 0 1rem 0 0;
+  & > div, .mat-mdc-button { height: 100% } }
+
+.filters {
+  height: 3em;
+  padding : 1rem;
+  transition: height 0.35s;
+  &:not(.show) { height : 0; padding : 0; visibility: hidden }
+}
+
+/* TODO(mdc-migration): The following rule targets internal classes of chips that may no longer apply for the MDC version. */
+/* TODO(mdc-migration): The following rule targets internal classes of chips that may no longer apply for the MDC version. */
+mat-chip-list {
+  margin-left : 1rem;
+  .mat-mdc-chip {
+    &:not(.mat-mdc-basic-chip) {
+      min-width: 162px; padding-right : 2rem;
+      &:not(.mat-mdc-basic-chip):not(.active) { justify-content: center; }
+    }
+  }
+  .mat-icon { margin-right : 1rem; }
+}
+
+.table-wrapper { width: 100%; overflow : auto; }
+.map-wrapper { border-top-width : 2px; }

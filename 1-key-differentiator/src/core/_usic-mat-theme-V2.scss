@@ -1,0 +1,125 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+@import 'usic-toolbar-variables';
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,500,700&display=swap');
+
+// font-size, line-height, font-weight, letter-spacing, ($font-family: 'override font')
+$usic-typography: mat.define-typography-config(
+  $font-family: 'Noto Sans KR, sans-serif',
+
+  $headline-5     : mat.define-typography-level(28px, 1em, 700, $letter-spacing: normal),   // h1 + .mat-headline
+  $headline-6        : mat.define-typography-level(21px, 1em, 700, $letter-spacing: normal ),     // h2 + .mat-title
+  $subtitle-1 : mat.define-typography-level(20px, 1.1em, 700, $letter-spacing: .025em),    // h3 + .mat-subheading-2
+  $body-1 : mat.define-typography-level(17.26px, 1.4em, 400, $letter-spacing: 0.05em), // h4 + mat-subheading-1
+  $subtitle-2       : mat.define-typography-level(14.2px, 1.3em, 500, $letter-spacing: 0.25px),  // Bolder body text.
+  $body-2       : mat.define-typography-level(16.5px, 1.41em, 400, $letter-spacing: 0.05em), // Base body text.
+  $caption      : mat.define-typography-level(13px, 1.4em, 500, $letter-spacing: 0.1em),     // Smaller body and hint text.
+  $button       : mat.define-typography-level(14.2px, 1em, 500),                             // Buttons and anchors.
+  /* TODO(mdc-migration): No longer supported. Use `body-1` instead. $input        : mat.define-typography-level(1rem, 1.2, 400, $font-family: 'Arial, sans-serif')  */                               // Form input fields.
+);
+
+$usic-card-typography: mat.define-typography-config(
+  $font-family: 'Noto Sans KR, sans-serif',
+  $headline-5     : mat.define-typography-level(21px, 1em, 500),   // h1 + .mat-headline
+  $headline-6        : mat.define-typography-level(48px, 1em, 700, $letter-spacing: normal ),     // h2 + .mat-title
+  $body-2       : mat.define-typography-level(15px, 1.41em, 400, $letter-spacing: 0.05em), // Base body text.
+);
+
+$usic-table-typography: mat.define-typography-config(
+  $font-family: 'Arial, sans-serif',
+  $body-2       : mat.define-typography-level(.875rem), // Base body text.
+  $caption      : mat.define-typography-level(13px),     // Smaller body and hint text.
+);
+
+// TODO(v15): As of v15 mat.legacy-core no longer includes default typography styles.
+//  The following line adds:
+//    1. Default typography styles for all components
+//    2. Styles for typography hierarchy classes (e.g. .mat-headline-1)
+//  If you specify typography styles for the components you use elsewhere, you should delete this line.
+//  If you don't need the default component typographies but still want the hierarchy styles,
+//  you can delete this line and instead use:
+//    `@include mat.legacy-typography-hierarchy( $usic-typography );`
+/* TODO(mdc-migration): Remove all-legacy-component-typographies once all legacy components are migrated*/
+@include mat.typography-hierarchy( $usic-typography );
+@include mat.all-legacy-component-typographies( $usic-typography );
+@include mat.all-component-typographies( $usic-typography );
+
+@include mat.core();
+@include mat.card-typography( $usic-card-typography );
+@include mat.dialog-typography( $usic-card-typography );
+@include mat.table-typography( $usic-table-typography );
+@include mat.paginator-typography( $usic-table-typography );
+@include mat.icon-button-typography( $usic-table-typography );
+@include mat.form-field-typography( $usic-table-typography );
+@include mat.select-typography( $usic-table-typography );
+
+$usic-colors: (
+  50 : #95c93d, //green
+  100 : #7f7c7f, //grey
+  200: #00305B, //blue
+  700: #1c1717, //black
+  400: #F25C0F, //red
+  contrast: (
+    50 : #fff,
+    100 : #FFFFFF,
+    200: #FFFFFF,
+    700: #FFFFFF,
+    400: #FFFFFF,
+  )
+);
+
+$usic-warn: (
+  default: #F25C0F, // usic red
+  lighter: lighten(#F25C0F, 35%), // usic red
+  darker: darken(#F25C0F, 10%), // usic red
+  contrast: (
+    default: #fff,
+    lighter: map-get($usic-colors, 700),
+    darker: #fff
+  )
+);
+
+$usic-surface: (
+  default: #7f7c7f, // usic grey
+  lighter: #fafafa, //FAFAFA
+  darker: #1c1717,  // usic black
+  contrast: (
+    default: #fff,
+    lighter: #000,
+    darker: #fff,
+  )
+);
+
+$usic-primary: mat.define-palette( $usic-colors, 200 );
+$usic-accent:  mat.define-palette( $usic-colors, 50 );
+
+$usic-theme: mat.define-light-theme( (
+  color: (
+    primary: $usic-primary,
+    accent: $usic-accent,
+    warn: $usic-warn ),
+  typography: ( $usic-typography )
+) );
+
+@include mat.all-component-themes($usic-theme);
+
+.table-toolbar .mat-mdc-slide-toggle { display: flex }
+.mat-mdc-slide-toggle {
+
+  --usic-green: rgb(149 201 61);
+  --usic-green-light: rgb(149 201 61 / 50%);
+
+  --mdc-switch-selected-track-color: var(--usic-green-light);
+  --mdc-switch-selected-hover-track-color: var(--usic-green-light);
+  --mdc-switch-selected-pressed-track-color: var(--usic-green-light);
+  --mdc-switch-selected-focus-track-color: var(--usic-green-light);
+
+  --mdc-switch-handle-surface-color: var(--usic-green);
+  --mdc-switch-selected-handle-color: var(--usic-green);
+  --mdc-switch-selected-hover-handle-color: var(--usic-green);
+  --mdc-switch-selected-pressed-handle-color: var(--usic-green);
+  --mdc-switch-selected-focus-handle-color: var(--usic-green);
+
+  .mdc-switch + label { white-space: nowrap; line-height : 1; margin : 0; }
+}

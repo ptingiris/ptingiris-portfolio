@@ -1,0 +1,37 @@
+<button mat-button type="button"
+        matTooltip="Toggle Displayed Columns"
+        matTooltipPosition="above"
+        *ngIf="displayedColumns.length"
+        [matMenuTriggerFor]="columnsMenu">
+
+  <mat-icon matPrefix>view_week</mat-icon>
+  <span fxHide fxShow.gt-xs> Columns</span>
+
+</button>
+
+<mat-menu #columnsMenu="matMenu">
+
+  <div cdkDropList (cdkDropListDropped)="reorderColumn($event)">
+
+    <ng-container *ngFor="let column of displayedColumns">
+      <button *ngIf="column.name !== 'select' && !(column.hideMobile && isMobile)" mat-menu-item
+              cdkDrag [cdkDragData]="column"
+              (click)="toggleColumn(column)">
+        <mat-icon>{{column.hidden ? 'visibility_off' : 'visibility'}}</mat-icon>
+        <span>{{column.title || (column.name | titleize)}}</span>
+      </button>
+    </ng-container>
+
+    <!--<button mat-menu-item (click)="hideAllColumns()">
+      <mat-icon>restore</mat-icon>
+      <span>Hide All Columns</span>
+    </button>-->
+
+    <button mat-menu-item (click)="resetColumns()">
+      <mat-icon>restore</mat-icon>
+      <span>Reset Columns</span>
+    </button>
+
+  </div>
+
+</mat-menu>

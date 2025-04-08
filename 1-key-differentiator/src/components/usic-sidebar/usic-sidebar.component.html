@@ -1,0 +1,84 @@
+<div class="sidebar bg-usic-surface-light" #sidebar
+     [ngClass]="{
+     'closed' : closed,
+     'mouse-over' : closed && mouseOver,
+      'left' : position === 'end'}"
+     [ngStyle]="{ 'width' : closed ? (ignoreIcons ? '8px' : iconsWidth) : sidebarWidth | async }"
+     (dblclick)="resetSidebar()"
+     mwlResizable
+     [enableGhostResize]="!closed"
+     (resizing)="onResize($event)">
+
+  <div class="content"
+       matTooltip="Drag divider to resize, double-click to reset." matTooltipShowDelay="3000" matTooltipPosition="above">
+
+    <div class="nav small-margin"
+         [ngClass]="{'active': activeItem === item.tab}"
+         *ngFor="let item of nav" (click)="navClick(item.tab)">
+
+      <h3>{{ item.title }}</h3>
+      <p *ngIf="item.desc" class="desc mat-caption"> {{ item.desc }} </p>
+
+    </div>
+
+    <div>
+
+      <mat-list *ngIf="navItems">
+
+        <ng-container *ngFor="let navItem of navItems">
+
+          <mat-divider *ngIf="navItem.name === 'divider' else regularNavItem"></mat-divider>
+
+          <ng-template #regularNavItem>
+
+            <mat-list-item *ngIf="navItem.show">
+              <button mat-button color="primary"
+                      [routerLink]="navItem.linkRoute"
+                      routerLinkActive="mat-accent"
+                      [routerLinkActiveOptions]="{exact: true}"
+                      (click)="navItemClick(navItem)"> <!-- currentNav=navItem -->
+
+                  <mat-icon class="margin-right material-symbols-outlined"
+                            matListIcon
+                            [matTooltip]="navItem.title || navItem.name">
+
+                    {{ (navItem?.icon  || navItem?.symbol) || 'settings' }}
+
+                  </mat-icon>
+
+                {{ navItem.name }}
+
+              </button>
+            </mat-list-item>
+
+          </ng-template>
+
+        </ng-container>
+
+      </mat-list>
+
+      <ng-content></ng-content>
+
+    </div>
+
+  </div>
+
+  <div class="resize-handle border"
+       mwlResizeHandle
+       [resizeEdges]="resizeEdges"
+  ></div>
+
+</div>
+
+<button *ngIf="showHideTrigger" class="show-hide-trigger border mat-elevation-z1"
+        [ngClass]="{ 'left' : position === 'end' }"
+        type="button"
+        [matTooltip]="helpText"
+        (click)="closeSidebar()">
+
+  <mat-icon> <ng-container [ngTemplateOutlet]="position === 'end' ? chevronLeft : chevronRight"></ng-container> </mat-icon>
+
+  <ng-template #chevronRight> {{ closed ? chevronRightIcon : chevronLeftIcon }} </ng-template>
+  <ng-template #chevronLeft> {{ closed ? chevronLeftIcon : chevronRightIcon }} </ng-template>
+
+</button>

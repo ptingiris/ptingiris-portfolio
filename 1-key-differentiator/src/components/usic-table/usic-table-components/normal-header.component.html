@@ -1,0 +1,51 @@
+<!-- if there is column filtering, show the column heading as inputs,
+         otherwise, just show basic text names for the headers -->
+<ng-container *ngIf="!parent.printPreview && (!column.icon && parent.filtering === 'column' && column.filterName !== 'none');
+         else basicTitle">
+
+  <span [ngSwitch]="column.type" (click)="$event.stopPropagation()" [fxHide]="!parent.expandFilters">
+
+    <mat-form-field appearance="outline" *ngSwitchCase="['date', 'datetime'].includes(column.type) ? column.type : ''">
+      <mat-label> {{column.title || (column.name | titleize)}} </mat-label>
+      <input matInput [matDatepicker]="picker" placeholder=" {{column.title || (column.name | titleize)}} "
+        [formControl]="parent.getFormControl(column.name)">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" *ngSwitchCase="['boolean', 'truthy'].includes(column.type) ? column.type : ''">
+      <mat-label> {{column.title || (column.name | titleize)}} </mat-label>
+      <select matNativeControl placeholder="{{column.title || (column.name | titleize)}}"
+        [formControl]="parent.getFormControl(column.name)">
+        <option value=""></option>
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+        >
+      </select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" *ngSwitchDefault>
+      <mat-label> {{column.title || (column.name | titleize) }} </mat-label>
+      <input matInput placeholder=" {{column.title || (column.name | titleize)}} "
+        [formControl]="parent.getFormControl(column.name)" (keydown)="$event.stopPropagation()">
+      <!-- <mat-icon matSuffix >search</mat-icon> -->
+    </mat-form-field>
+
+  </span>
+
+  <span [fxHide]="parent.expandFilters">
+    {{ column.title ? column.title : (column.name | titleize) }}
+  </span>
+
+</ng-container>
+
+<ng-template #basicTitle>
+
+  <mat-form-field appearance="outline" color="transparent">
+
+    <mat-label> {{ column.title ? column.title : (column.name | titleize) }} </mat-label>
+    <input matInput type="text" readonly>
+
+  </mat-form-field>
+
+</ng-template> <!-- #basicTitle -->

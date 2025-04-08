@@ -1,0 +1,157 @@
+<div class="table-toolbar bg-usic-surface-light border-top border-bottom">
+
+  <div fxLayoutAlign="space-between center">
+
+    <!-- selected actions -->
+    <div fxFlex fxLayoutAlign="start center"
+         class="selected-actions bg-usic-white mat-caption">
+
+      <ng-container *ngIf="parent.selectedRows?.length && parent.selectedActions?.length">
+
+        <div class="more-icon"
+             fxLayoutAlign="start center"
+             [matMenuTriggerFor]="selectedMenu"
+             matTooltip="Perform actions on selected rows"
+             matTooltipPosition="above">
+          <mat-icon matPrefix>more_vert</mat-icon>
+        </div>
+
+        <div class="padding-right" fxLayoutAlign="start center">
+
+          <button class="show-selected"
+                  *ngIf="parent.cumulativeSelections && parent.cumulativeSelectionsKeys.length; else selectedText"
+                  [matMenuTriggerFor]="cumSelectedMenu"
+                  mat-flat-button color="accent">
+
+            <ng-container *ngTemplateOutlet="selectedText"></ng-container>
+
+          </button>
+
+          <ng-template #selectedText>
+            <span style="white-space: nowrap">{{parent.selectedRows.length}} selected</span>
+          </ng-template>
+
+          <mat-menu #cumSelectedMenu="matMenu">
+
+            <ol>
+
+              <li class="mat-caption padding-right" *ngFor="let selectedRow of parent.selectedRows; let i = index">
+
+                <ng-container *ngFor="let property of parent.selectedRows[i] | keyvalue">
+
+                  <ng-container *ngFor="let key of parent.cumulativeSelectionsKeys; let keysIdx = index">
+
+                    <span *ngIf="property.key === key.name">
+                      {{ keysIdx && ( keysIdx > 0 ) ? '|' : null }}
+                      {{ key.label }}: {{ property.value }}
+                    </span>
+
+                  </ng-container>
+
+                </ng-container>
+
+              </li>
+
+            </ol>
+
+          </mat-menu>
+
+        </div>
+
+        <mat-menu #selectedMenu="matMenu">
+          <ng-container *ngFor="let selectedAction of parent.selectedActions">
+            <button mat-menu-item (click)="selectedAction.action($event)" [disabled]="!selectedAction.enabled">
+              <ng-container *ngIf="selectedAction.class else noOverlay">
+                <div class="{{selectedAction.class}}">
+                  <mat-icon>{{selectedAction.icon}}</mat-icon>
+                  <span></span>
+                </div>
+                <span>{{selectedAction.name}}</span>
+              </ng-container>
+              <ng-template #noOverlay>
+                <mat-icon>{{selectedAction.icon}}</mat-icon>
+                <span>{{selectedAction.name}}</span>
+              </ng-template>
+            </button>
+          </ng-container>
+        </mat-menu>
+
+        <div class="padding-left" fxLayoutAlign="start center">
+          <mat-slide-toggle disableRipple="true"
+                            (change)="$event ? parent.cumulativeSelections = $event.checked : null"
+                            [checked]="parent.cumulativeSelections">
+            <span class="mat-caption"> Cumulative </span>
+          </mat-slide-toggle>
+        </div>
+
+      </ng-container>
+
+    </div>
+
+    <!-- loading spinners -->
+    <div fxFlex fxLayoutAlign="center" class="text-usic-blue">
+      <button mat-button *ngIf="(parent.jsonApiDataSource?.loading | async) || parent.dataSourceLoading"
+              (click)="parent.jsonApiDataSource?.cancel(); cancelClicked.emit()"
+              matTooltip="Data loading, click to abort">
+        <mat-spinner [diameter]="18"></mat-spinner>
+        Loading...
+      </button>
+
+      <button mat-button *ngIf="parent.isExporting && !(parent.jsonApiDataSource?.loading | async)"
+              (click)="parent.cancelExport()"
+              matTooltip="Exporting to Excel, click to abort">
+        <mat-spinner [diameter]="18"></mat-spinner>
+        Exporting...
+      </button>
+
+    </div>
+
+    <!-- right buttons -->
+    <div class="right-buttons" fxFlex fxLayoutAlign="end center">
+      <ng-content></ng-content>
+
+      <!-- clear filters button -->
+      <button mat-button
+              matTooltip="Clear column filters"
+              matTooltipPosition="left"
+              *ngIf="parent.filtering === 'column' && parent.hasFilters"
+              (click)="parent.clearFilters()">
+
+        <mat-icon matPrefix>search_off</mat-icon>
+        Clear filters
+
+      </button>
+
+      <!-- export button -->
+      <button mat-button
+              matTooltip="Export {{ parent.selectedRows?.length > 0 ? 'selected rows' : 'full table' }} to Excel"
+              matTooltipPosition="above"
+              [disabled]="parent.isExporting"
+              *ngIf="parent.provideExcelExport && !parent.isMobile" (click)="parent.exportToExcel()">
+
+        <mat-icon matPrefix>cloud_download</mat-icon>
+        Export {{ parent.selectedRows?.length > 0 ? 'selected' : 'table' }}
+
+      </button>
+
+      <lib-columns-selector [displayedColumns]="parent.displayedColumns"
+                            [prefix]="parent.prefix"
+                            [hiddenColumns]="parent.hiddenColumns"
+                            [persistColumns]="parent.persistColumns"
+                            (changeColumns)="onChangeColumns($event)"></lib-columns-selector>
+
+      <!-- NEW button -->
+      <ng-container *ngIf="parent.allowNew">
+
+        <button type="button"
+                mat-flat-button color="grey"
+                (click)="parent.onCreateNew($event)"> <mat-icon matPrefix> add </mat-icon>
+          {{ parent.createButtonText || 'New' }} </button>
+
+      </ng-container>
+
+    </div>
+
+  </div>
+
+</div>

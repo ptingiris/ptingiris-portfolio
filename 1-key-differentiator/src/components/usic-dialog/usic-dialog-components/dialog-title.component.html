@@ -1,0 +1,33 @@
+<div mat-dialog-title [ngClass]="{'bg-usic-blue' : parent.titleBg === 'blue'}"
+  [ngStyle]="{padding: (parent.title) ? 'default' : 0}">
+
+  <button *ngIf="parent.showBack" mat-icon-button>
+    <mat-icon> keyboard_backspace </mat-icon>
+  </button>
+
+
+  <ng-container *ngIf="parent.title else noTitle">
+  <h1 [ngStyle.xs]="{fontSize:'20px'}"
+      fxFlex fxLayoutAlign="center center">
+
+    <span> {{ parent.title }} </span>
+
+    <!-- renders a conditional 'read-only' icon with message  -->
+    <button *ngIf="parent.canEdit !== null && parent.canEdit===false"
+            mat-icon-button [mat-dialog-close]
+            [matTooltip]="parent.readOnlyTooltip || 'READ ONLY'">
+      <mat-icon color="warn"> not_interested </mat-icon>
+    </button>
+
+  </h1>
+  </ng-container>
+  <ng-template #noTitle>
+    <div fxFlex fxLayoutAlign="center center">&nbsp;
+    </div>
+  </ng-template>
+
+  <button class="title-close-button" mat-icon-button mat-dialog-close="Closed.">
+    <mat-icon> close </mat-icon>
+  </button>
+
+</div>

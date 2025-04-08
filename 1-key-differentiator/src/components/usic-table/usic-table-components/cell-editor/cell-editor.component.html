@@ -1,0 +1,28 @@
+<div class="margin-top">
+
+  <lib-usic-page-header pageName="Edit {{ (data.column.title || data.column.name) | titleize}}"></lib-usic-page-header>
+
+</div>
+
+<form class="padding" [formGroup]="cellForm">
+
+  <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutGap.gt-xs="1rem">
+    <mat-form-field appearance="fill" fxFlex>
+      <mat-label> {{ (data.column.title || data.column.name) | titleize}}</mat-label>
+      <!-- TODO This dialog currently only supports a string data type, but we could 
+        add a switch off of data.column.type to support more data types -->
+      <input matInput type="text" placeholder="{{ (data.column.title || data.column.name) | titleize}}" formControlName="cell">
+
+      <mat-error> {{ (data.column.title || data.column.name) | titleize}} is required. </mat-error>
+    </mat-form-field>
+  </div>
+
+
+  <div fxLayoutAlign="end center">
+
+    <button mat-flat-button color="accent" type="submit" [mat-dialog-close]="cellForm.value"> Submit </button>
+    <button mat-button type="reset" mat-dialog-close> Cancel </button>
+
+  </div>
+
+</form>

@@ -1,0 +1,133 @@
+:host {
+  position: relative;
+}
+
+.show-hide-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  color: #00305b;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, 50%);
+  height: 20px;
+  width: 20px;
+  z-index: 101;
+  padding: 0;
+
+  .mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px
+  }
+
+  &:hover {
+    background-color: #00305b;
+    color: #fff;
+    visibility: visible
+  }
+
+  &.left {
+    right: auto;
+    left: 0;
+    transform: translate(-50%, 50%)
+  }
+}
+
+.sidebar {
+  height: 100%;
+  overflow: auto;
+
+  transition: all 0.35s;
+
+  .nav {
+    overflow: auto;
+  }
+
+  .content {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    overflow: auto;
+  }
+
+  &.closed .content,
+  &.icons .content {
+    overflow-x: hidden;
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+
+  }
+
+  .desc {
+    min-width: 200px;
+    font-size: 12px;
+  }
+
+  .resize-handle {
+    border-width: 0 2px 0 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    transition: border-color 0.25s;
+    z-index: 100;
+  }
+
+  &:not(.closed) .resize-handle {
+    cursor: col-resize;
+
+    &:hover {
+      border-color: #00305b;
+    }
+  }
+
+  &.left .resize-handle {
+    right: auto;
+    left: 0;
+    border-width: 0 0 0 2px;
+  }
+}
+
+
+@media all AND (min-width: 767px) {
+
+  div.nav {
+    border: 1px solid transparent;
+    cursor: pointer;
+    padding: 1rem 1rem .5rem;
+
+    /* overflow-x : scroll; */
+    &:hover,
+    &.active {
+      background-color: rgba(0, 0, 0, .04);
+      border-color: rgba(0, 0, 0, .08);
+    }
+
+    &.active h3 {
+      color: #95c93d;
+    }
+
+    & h3 {
+      white-space: nowrap
+    }
+  }
+
+}
+
+@media print {
+  :host {
+    display: none;
+  }
+}

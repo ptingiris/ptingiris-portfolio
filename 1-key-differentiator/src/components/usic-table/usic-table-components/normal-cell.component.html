@@ -1,0 +1,110 @@
+<ng-container *ngIf="column.linkRoute else linkedData">
+
+  <ng-container *ngIf="column.linkId4 else tripleId">
+    <a [routerLink]="[column.linkRoute, element[column.linkId], element[column.linkId2], element[column.linkId3], element[column.linkId4]]">
+      <ng-container *ngIf="column.icon else normalText">
+        <mat-icon>{{column.icon}}</mat-icon>
+      </ng-container>
+
+      <ng-template #normalText>
+        {{ element | resolve:(column.name) | dataFormatter:(column.type) }}
+      </ng-template>
+    </a>
+  </ng-container>
+
+  <ng-template #tripleId>
+    <ng-container *ngIf="column.linkId3 else doubleId">
+      <a [routerLink]="[column.linkRoute, element[column.linkId], element[column.linkId2], element[column.linkId3]]">
+        <ng-container *ngIf="column.icon else normalText">
+          <mat-icon>{{column.icon}}</mat-icon>
+        </ng-container>
+
+        <ng-template #normalText>
+          {{element | resolve:(column.name) | dataFormatter:(column.type)}}
+        </ng-template>
+      </a>
+    </ng-container>
+  </ng-template>
+
+  <ng-template #doubleId>
+    <ng-container *ngIf="column.linkId2 else singleId">
+      <a [routerLink]="[column.linkRoute, element[column.linkId], element[column.linkId2]]">
+        <ng-container *ngIf="column.icon else normalText">
+          <mat-icon>{{column.icon}}</mat-icon>
+        </ng-container>
+
+        <ng-template #normalText>
+          {{element | resolve:(column.name) | dataFormatter:(column.type)}}
+        </ng-template>
+      </a>
+    </ng-container>
+  </ng-template>
+
+  <ng-template #singleId>
+    <a [routerLink]="[column.linkRoute, element[column.linkId]]">
+      <ng-container *ngIf="column.icon else normalText">
+        <mat-icon>{{column.icon}}</mat-icon>
+      </ng-container>
+
+      <ng-template #normalText>
+        {{element | resolve:(column.name) | dataFormatter:(column.type)}}
+      </ng-template>
+    </a>
+  </ng-template>
+
+</ng-container>
+
+<ng-template #linkedData [ngSwitch]="column.type">
+
+  <ng-container *ngSwitchCase="'component'">
+
+    <ng-container *ngComponentOutlet="column.component; injector: myInjector;"></ng-container>
+
+  </ng-container>
+
+  <ng-template ngSwitchDefault>
+
+    <ng-container *ngIf="column.linkUrl else flatData">
+      <!-- nosemgrep: generic.html-templates.security.var-in-href.var-in-href, javascript.express.security.audit.xss.mustache.var-in-href.var-in-href, python.django.security.audit.xss.template-href-var.template-href-var, python.flask.security.xss.audit.template-href-var.template-href-var -->
+      <a href="{{element | resolve:(column.linkUrl)}}" 
+         [attr.data-content]="element | resolve:(column.name) | dataFormatter:(column.type)" 
+         target="_blank" rel="noopener noreferrer nofollow">
+        <ng-container *ngIf="column.icon else normalText">
+          <mat-icon>{{column.icon}}</mat-icon>
+        </ng-container>
+
+        <ng-template #normalText>
+          {{element | resolve:(column.name) | dataFormatter:(column.type)}}
+        </ng-template>
+      </a>
+    </ng-container>
+
+  </ng-template>
+
+</ng-template>
+
+<ng-template #flatData [ngSwitch]="column.type">
+
+  <div (click)="parent.onCellClick($event, column, element)"
+    (contextmenu)="parent.onContextMenu($event, column, element)">
+
+    <ng-container *ngSwitchCase="'component'">
+
+      <ng-container *ngComponentOutlet="column.component; injector: myInjector;"></ng-container>
+
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'icon'">
+
+      <mat-icon [attr.data-value]="element[column.name]">{{column.icon}}</mat-icon>
+
+    </ng-container>
+
+    <ng-template ngSwitchDefault>
+
+      {{element | resolve:(column.name) | dataFormatter: column.type: (parent?.dataSource?.filter ? parent.dataSource.filter[column.filterName || column.name] : undefined) }}
+
+    </ng-template>
+  </div>
+
+</ng-template>

@@ -1,0 +1,39 @@
+<div fxLayout="column">
+
+  <usic-dialog-title *ngIf="!isSlider" [parent]="self"></usic-dialog-title>
+
+  <!-- only render components that use FormGroup within a parentForm -->
+  <form *ngIf="!dialogForm; else contentOutlet"
+        [formGroup]="parentForm" (ngSubmit)="onSubmit()">
+    <usic-dialog-content [parent]="self">
+
+      <ng-container *ngTemplateOutlet="contentOutlet"></ng-container>
+
+    </usic-dialog-content>
+
+    <mat-dialog-actions *ngIf="includeActions" align="end">
+
+      <usic-dialog-buttons [parent]="self">
+
+        <!-- type="button" is required to circumvent form submission -->
+        <button mat-flat-button *ngFor="let button of additionalButtons"
+                type="button"
+                [color]="parentForm?.invalid ? 'warn' : 'accent'"
+                [disabled]="( childForm || dialogForm )?.pristine || ( parentForm || dialogForm )?.invalid || submitBtnDisabled"
+                (click)="button.buttonFn($event, parentForm)">
+
+          {{button.buttonName}}
+
+        </button>
+
+      </usic-dialog-buttons>
+
+    </mat-dialog-actions>
+  </form>
+
+  <!-- components that use ngForm render the form, including SUBMIT and CANCEL. -->
+  <ng-template #contentOutlet>
+    <ng-content></ng-content>
+  </ng-template>
+
+</div>

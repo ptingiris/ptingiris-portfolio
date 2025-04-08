@@ -1,0 +1,622 @@
+@use '@angular/material' as mat;
+
+/*  projects/usic-lib/src/lib/styles.scss */
+@import 'assets/css/usic-mat-theme-V2';
+
+*:focus { outline: none!important; }
+html, body { height : 100% }
+body {
+  background-color: #fff; /* mat.get-color-from-palette($usic-surface, "lighter") */
+  font-family : mat.font-family($usic-typography, "body-1");
+  margin : 0; }
+
+/* typography */
+h1, h2, h3, h4, h5, h6 { margin : 0 0 .25em; }
+h1 { // PAGE TITLES
+  @extend .mat-headline;
+  color: rgba(0,0,0,.6);
+  margin-top : .5em; }
+h2 { @extend .mat-title; color: mat.get-color-from-palette( $usic-accent ); text-transform : uppercase; } // PAGE SUBTITLES - USIC GREEN
+h3 { @extend .mat-subheading-2; color: mat.get-color-from-palette( $usic-primary ); margin-bottom : 1em; } // Subtitles - USIC Blue
+h4 { @extend .mat-subheading-1; }
+h4 { @extend .mat-subheading-1; }
+p { @extend .mat-body-1; margin-bottom : 0; }
+dl { @extend .mat-caption; font-weight : normal; dd { margin : .25em 1em .5em; } }
+td, .mat-mdc-cell {
+  font-size : .875rem;
+  font-weight : 400; letter-spacing: .038em; }
+
+@media screen AND (max-width: 600px) {
+  h1 { font-size : 1.875rem; }
+}
+
+a, a:link, a:visited {
+  color : mat.get-color-from-palette($usic-primary);
+  transition : all 0.35s;
+  &:hover { opacity : .6 }
+  &.cursor-pointer { cursor : pointer; }
+}
+
+fieldset {
+  @extend .border;
+  margin-bottom : 2rem;
+  padding : 1.4em 1.4em 0;
+  & legend { font-size : .875rem; font-weight : 500; text-transform : uppercase; }
+}
+hr { border-color : mat.get-color-from-palette( $usic-colors, grey, .27 ); border-width : 0 0 1px; margin-bottom : 1rem; }
+
+/* alerts */
+.alert {
+  @extend .bg-usic-surface-light, .border, .mat-caption;
+  color: mat.get-color-from-palette( $usic-warn)!important;
+  margin : 1rem 0 2rem; padding : 1rem;
+  overflow: auto }
+
+.app-header, .app-footer { z-index : 1000; }
+.app-footer { background-color: #ffffff }
+
+/* background colors */
+.bg-usic {
+  &-green { background-color: mat.get-color-from-palette($usic-accent); color: mat.get-contrast-color-from-palette( $usic-colors, 50 ) }
+  &-grey { background-color: mat.get-color-from-palette($usic-surface); color: #fff }
+  &-light-grey { background-color: mat.get-color-from-palette($usic-surface, default, .17); color: #fff }
+  &-blue { background-color: mat.get-color-from-palette($usic-primary); color: mat.get-contrast-color-from-palette( $usic-colors, 200 ) }
+  &-light-blue { background-color: mat.get-color-from-palette($usic-primary, default, .17); color: mat.get-color-from-palette( $usic-primary ) }
+  &-black { background-color: mat.get-color-from-palette($usic-colors, 700); color: #fff }
+  &-red { background-color: mat.get-color-from-palette($usic-warn); color: mat.get-contrast-color-from-palette( $usic-colors, 400 ) }
+  &-white { background-color: #fff!important; color: mat.get-color-from-palette( $usic-colors, 700 ) }
+  &-surface {
+    background-color:  mat.get-color-from-palette($usic-surface); color: mat.get-contrast-color-from-palette($usic-surface, default) ;
+    &-light {
+      background-color:  mat.get-color-from-palette($usic-surface, "lighter")!important;
+      color: mat.get-contrast-color-from-palette( $usic-surface, lighter ) };
+    &-dark { background-color:  mat.get-color-from-palette($usic-surface, "darker"); color: mat.get-contrast-color-from-palette( $usic-surface, darker ) };
+  }
+  &-warn {
+    background-color:  mat.get-color-from-palette($usic-warn)!important;
+    color: mat.get-contrast-color-from-palette($usic-warn, default) ;
+    &-light {
+      background-color:  rgba(mat.get-color-from-palette($usic-warn, "lighter"), .6)!important;
+      color: mat.get-contrast-color-from-palette( $usic-warn, lighter ) };
+    &-dark {
+      background-color:  mat.get-color-from-palette($usic-warn, "darker")!important;
+      color: mat.get-contrast-color-from-palette( $usic-warn, darker ) };
+  }
+}
+
+/* borders */
+.border {
+  border : 1px solid rgba(mat.get-color-from-palette($usic-surface, "darker"), .17);
+  &-top     { border-top : 1px solid rgba(mat.get-color-from-palette($usic-surface, "darker"), .17); }
+  &-right   { border-right : 1px solid rgba(mat.get-color-from-palette($usic-surface, "darker"), .17); }
+  &-bottom  { border-bottom : 1px solid rgba(mat.get-color-from-palette($usic-surface, "darker"), .17); }
+  &-left    { border-left : 1px solid rgba(mat.get-color-from-palette($usic-surface, "darker"), .17); }
+  &-light {
+    border: 1px solid rgba(#fff,.27);
+    &-top     { @extend .border-light; border-width : 1px 0 0 0; }
+    &-right   { @extend .border-light; border-width : 0 1px 0 0; }
+    &-bottom  { @extend .border-light; border-width : 0 0 1px 0; }
+    &-left    { @extend .border-light; border-width : 0 0 0 1px; }
+  }
+  &-accent { border-color: mat.get-color-from-palette($usic-accent) }
+}
+
+.error-panel {
+
+  @extend .bg-usic-warn-light, .border;
+  margin : 2rem 0; padding : 1.5rem 2rem 1rem;
+  .error-title {
+    color: inherit;
+    font-size : mat.font-size($usic-card-typography, 'headline-5');
+    margin : 0 0 1em; }
+  .errors { margin : 0 0 0 1.5rem; padding : 0; }
+  .error { margin : 0 0 .25rem; padding-left : 1rem; }
+}
+.info-panel {
+
+  @extend .bg-usic-surface-light, .border;
+  margin : 2rem 0; padding : 1.25rem 2rem 1rem;
+  .error-title {
+    color: inherit;
+    font-size : mat.font-size($usic-card-typography, 'headline-5');
+    margin : 0 0 1em; }
+  .errors { margin : 0 0 0 1.5rem; padding : 0; }
+  .error { margin : 0 0 .25rem; padding-left : 1rem; }
+}
+
+/* margins */
+.margin {
+  margin : 1rem!important;
+  &-top { margin-top : 1rem!important; }
+  &-right { margin-right : 1rem!important; }
+  &-bottom { margin-bottom : 1rem!important; }
+  &-left { margin-left : 1rem!important; }
+}
+.small-margin {
+  margin : 0.5rem!important;
+  &-top { margin-top : 0.5rem!important; }
+  &-right { margin-right : 0.5rem!important; }
+  &-bottom { margin-bottom : 0.5rem!important; }
+  &-left { margin-left : 0.5rem!important; }
+}
+.no-margin {
+  margin : 0;
+  &-top { margin-top : 0!important; }
+  &-right { margin-right : 0!important; }
+  &-bottom { margin-bottom : 0!important; }
+  &-left { margin-left : 0!important; }
+}
+
+/* padding */
+.padding {
+  padding : 1rem;
+  &-top { padding-top : 1rem; }
+  &-right { padding-right : 1rem; }
+  &-bottom { padding-bottom : 1rem; }
+  &-left { padding-left : 1rem; }
+}
+.no-padding {
+  padding : 0!important;
+  &-top { padding-top : 0!important; }
+  &-right { padding-right : 0!important; }
+  &-bottom { padding-bottom : 0!important; }
+  &-left { padding-left : 0!important; }
+}
+
+.scroll {
+  overflow: auto;
+  &-y { overflow-y : auto; }
+  &-x { overflow-x : auto; }
+}
+
+/* text colors & styling */
+.text {
+  &-capitalize { text-transform : capitalize; }
+  &-center { text-align : center!important; }
+  &-uppercase { text-transform : uppercase; }
+  &-weight {
+    &-bold { font-weight : 700!important; }
+  }
+  &-fixed-width { font-family: "Courier New", Courier, monospace; }
+}
+.text-usic {
+  &-green { color: mat.get-color-from-palette($usic-accent)!important }
+  &-grey { color: mat.get-color-from-palette($usic-surface)!important }
+  &-blue { color: mat.get-color-from-palette($usic-primary)!important }
+  &-black {
+    color: mat.get-color-from-palette($usic-surface, "darker")!important;
+    &-medium { color: rgba( 0,0,0,.6 ) }
+  }
+  &-red { color: mat.get-color-from-palette($usic-warn)!important }
+  &-white {
+    color: #fff!important;
+    &-medium { color: rgba(#fff, .6)!important;} }
+}
+
+
+.mat-mdc-button .mdc-button__label, .mat-mdc-unelevated-button .mdc-button__label, .mat-mdc-raised-button .mdc-button__label, .mat-mdc-outlined-button .mdc-button__label {
+  white-space: nowrap;
+  display: inline-flex;
+  gap: .5em;
+  align-items: center;
+}
+
+/* makes all buttons border-radius 0 & text uppercase */
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-unelevated-button,
+.mat-mdc-outlined-button {
+  border-radius: 0!important;
+  text-transform : uppercase!important; }
+
+/* text colors for buttons with no backgrounds */
+.mat-mdc-button, .mat-mdc-outlined-button {
+  &.mat-white { color: #fff }
+  &.mat-black { color: mat.get-color-from-palette( $usic-colors, 700 ) }
+  &.mat-grey { color: mat.get-color-from-palette( $usic-colors, grey ) }
+  &.mat-warn { color: mat.get-color-from-palette( $usic-colors, 400 ) }
+}
+
+/* background colors & text colors for solid buttons, toolbars & fabs */
+.mat-mdc-raised-button,
+.mat-mdc-unelevated-button,
+.mat-toolbar,
+.mat-mdc-fab, .mat-mdc-mini-fab {
+  &.mat-white { background-color: #ffffff; color: mat.get-color-from-palette($usic-colors, grey) }
+  &.mat-black { background-color: mat.get-color-from-palette($usic-colors, 700); color: mat.get-contrast-color-from-palette($usic-colors, 700) }
+  &.mat-grey { background-color: mat.get-color-from-palette( $usic-colors, grey ); color: mat.get-contrast-color-from-palette( $usic-colors, grey ) }
+  &.mat-warn { background-color: mat.get-color-from-palette( $usic-colors, 400 ); color: mat.get-contrast-color-from-palette( $usic-colors, 400 ) }
+}
+
+.mat-mdc-raised-button { border: 1px solid rgba(0,0,0,.12)!important; }
+
+.mat-mdc-mini-fab {
+  line-height : 36px!important; width: 36px!important; height: 36px!important;
+  & .mat-icon { height: 36px; width: 36px; position : relative; top : -2px; }
+}
+
+.mat-mdc-icon-button {
+  &.mat-mdc-button-base, .material-icons { font-size : 20px }
+}
+
+.mat-icon {
+  cursor : pointer;
+  &.mat-primary { color: mat.get-color-from-palette($usic-colors, 200) }
+  &.mat-accent { color: mat.get-color-from-palette($usic-colors, 50) }
+  &.mat-warn { color: mat.get-color-from-palette($usic-colors, 400) }
+  &.mat-grey { color: mat.get-color-from-palette($usic-colors, grey) }
+  &.mat-dark-grey { color: mat.get-color-from-palette($usic-colors, 700) }
+}
+
+.mat-paginator .mat-mdc-input-element {
+  border: none;
+  background: transparent;
+  color: inherit;
+  text-align: right;
+}
+
+/* .mat-form-field */
+.mat-mdc-form-field {
+
+  &.mat-form-field-appearance-outline .mdc-notched-outline {
+    &__leading,
+    &__notch,
+    &__trailing { /*background-color : #fff*/ }
+  }
+  /*  TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+  &.mat-form-field-appearance-outline .mat-form-field-suffix { position : absolute; right : 0; transform: translateY(25%)}
+
+  /* disabled form element text color */
+  .mat-select-disabled .mat-select-value,
+  .mat-mdc-input-element:disabled { color: rgba(0,0,0,.54) }
+
+  &.mat-form-field-appearance-fill {
+
+    position: relative;
+    /* form field indicator size & position */
+    .mdc-line-ripple::before,
+    .mdc-line-ripple
+    { position: absolute; left : 0; bottom : 0;
+      border: solid; border-width: 0 0 0 2px;
+      height: 100%;
+    }
+
+    /* fill-able form field indicator (not disabled) */
+    .mdc-line-ripple::before,
+    .mdc-line-ripple {
+      border-color: darken(mat.get-color-from-palette( $usic-accent ), 5%);
+    }
+
+    &.mat-form-field-invalid .mdc-line-ripple::before,
+    &.mat-form-field-invalid .mdc-line-ripple {
+      border-color: darken(mat.get-color-from-palette( $usic-warn ), 5%);
+    }
+
+    &.mat-form-field-disabled .mdc-line-ripple::before,
+    &.mat-form-field-disabled .mdc-line-ripple {
+      border-color: darken(mat.get-color-from-palette( $usic-surface ), 5%);
+    }
+
+    /* fill-able form field indicator (disabled) */
+    &.mat-form-field-disabled .mat-form-field-underline::before {
+      background-color: rgba(0,0,0,.42);
+    }
+
+    .mdc-text-field--disabled.mdc-text-field--filled {
+      background-color: rgba(255,255,255,.8);
+      border: 1px solid #ccc
+    }
+  }
+
+  &.mat-form-field-appearance-outline[color="transparent"] {
+
+    &,
+    & .mat-mdc-floating-label,
+    & .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mdc-text-field__input
+    { cursor : default }
+
+    .mdc-notched-outline__leading,
+    .mdc-notched-outline__notch,
+    .mdc-notched-outline__trailing {
+      border-color: #ddd;
+      background-color: mat.get-color-from-palette($usic-surface, lighter) }
+
+  }
+}
+
+/* mat-list */
+.mat-mdc-list-base {
+  .mat-mdc-list-item {
+    font-size: mat.font-size($usic-typography, body-1);
+    //@include mat-line-base(mat.font-size($usic-typography, body-1));
+  }
+  /*  TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version. */
+  .mat-list-option {
+    font-size: mat.font-size($usic-typography, body-1);
+    //@include mat-line-base(mat.font-size($usic-typography, body-1));
+  }
+
+  .mat-mdc-subheader {
+    font-family: mat.font-family($usic-typography, body-2);
+    font-size: mat.font-size($usic-typography, body-2);
+    font-weight: mat.font-weight($usic-typography, body-2);
+  }
+  &.has-icons {
+    /*  TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version. */
+    .mat-mdc-list-item .mat-list-item-content { padding: 0 }
+    .mat-mdc-subheader { white-space: nowrap }
+  }
+}
+/*  TODO(mdc-migration): The following rule targets internal classes of list that may no longer apply for the MDC version. */
+.icons .mat-mdc-list-base .mat-mdc-list-item .mat-list-item-content { padding : 0; }
+
+/* mat overrides */
+.mat-calendar { background-color: #fff }
+
+/*  TODO(mdc-migration): The following rule targets internal classes of checkbox that may no longer apply for the MDC version. */
+label.mat-checkbox-layout { margin: 0; }
+
+.mat-mdc-card-header { flex: 1 1 100%; justify-content : space-between; }
+
+.mat-mdc-card.video {
+  cursor           : pointer;
+  text-align       : center;
+  margin-bottom    : 1rem;
+  /*  TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version. */
+  /*  TODO(mdc-migration): The following rule targets internal classes of card that may no longer apply for the MDC version. */
+  .mat-card-header-text {
+    width      : 100%;
+    text-align : center;
+
+    .mat-mdc-card-title {
+      font-size : 1.5rem;
+    }
+
+  }
+
+  .mat-mdc-card-content {
+    video {
+      max-height : 50vh;
+      max-width  : 50vw;
+    }
+
+  }
+
+}
+
+.mat-mdc-chip:not(.mat-mdc-basic-chip) {
+  color: mat.get-color-from-palette( $usic-colors, 700 );
+  font: mat.font-family( $usic-typography, "body-2");
+  background-color: mat.get-color-from-palette( $usic-surface, "lighter" );
+  border-radius: .25rem!important;
+  border: 1px solid rgba(mat.get-color-from-palette($usic-surface), .27);
+  height: 1.4em;
+
+  &.active { background-color: rgba(mat.get-color-from-palette($usic-surface, "darker"), .2); }
+  &:not(.active):hover { background-color: mat.get-color-from-palette($usic-surface); color: #fff; cursor : pointer; }
+}
+/*  TODO(mdc-migration): The following rule targets internal classes of chips that may no longer apply for the MDC version. */
+.mat-chip-list-wrapper { align-items: inherit!important; }
+
+/* mat dialog */
+.usic-dialog {
+
+  .mat-mdc-dialog-container { background-color: #f0f0f0; border-radius: 0; padding : 0; }
+  .mat-mdc-dialog-title {
+    background-color: #fff;
+    @extend .border-bottom;
+    display: flex; flex-direction: row; flex: 0 0 auto;
+    justify-content: space-between; align-items: center;
+    margin : 0; padding: 1rem;
+    h1 { color: mat.get-color-from-palette( $usic-colors, 200 ); font-size : 1.9375rem; margin : 0; }
+  }
+  .mdc-dialog .mdc-dialog__content {
+    background-color: #fff; margin : 0; padding : 0; max-height: none; height: 100%;
+  }
+  .mat-mdc-dialog-actions { @extend .border-top, .mat-elevation-z1; background-color: #fff; margin : 0; padding: 1rem; }
+
+}
+
+/* mat-divider */
+.mat-divider-vertical { border: solid rgba(0,0,0,.27); border-width: 0 1px 0 0 }
+
+/* mat error */
+.mat-mdc-form-field-error { color: mat.get-color-from-palette( $usic-warn ) }
+
+/* mat expansion panel */
+.mat-accordion {
+  &.usic-accordion {
+    .mat-expansion-panel-header-title { text-transform : uppercase; }
+    .mat-expansion-panel {
+      @extend .border;
+      &:first-of-type, &:last-of-type { border-radius : 0 }
+      /*  TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version. */
+      /*  TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version. */
+      mat-table { @extend .border-bottom }
+      mat-row:last-of-type { border-bottom: none }
+      .table-wrapper { @extend .border; border-width: 0 1px 1px }
+      .table-toolbar { @extend .border }
+      /*  TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+      mat-header-cell .mat-form-field-label-wrapper { font-size : 13px; top: -.45em}
+    }
+  }
+}
+
+/* mat sidenav */
+mat-drawer { padding: 1.5rem; min-width: 20% }
+mat-drawer-content { background-color: white }
+/*  TODO(mdc-migration): The following rule targets internal classes of dialog that may no longer apply for the MDC version. */
+mat-dialog-container .mat-drawer { width: 33%; }
+
+.mat-mdc-menu-panel { max-width: none }
+
+/* mat paginator */
+.usic-paginator {
+
+  .mat-mdc-paginator {
+    /*  TODO(mdc-migration): The following rule targets internal classes of select that may no longer apply for the MDC version. */
+    .mat-select-value { color: rgba(0,0,0,.54)}
+    &-outer-container { border : solid #ccc; border-width: 1px 0; padding : 0 0 0 .5rem; margin-top : 1rem; }
+    &-page-size { margin-right : 1rem; }
+    &-page-size-label { margin : 0 .5rem 0 0; }
+    &-range-label { margin : 0; }
+
+  }
+
+}
+
+@media screen AND (max-width: 767px) {
+  .usic-paginator {
+
+    .mat-mdc-paginator {
+
+      &-container { flex-wrap: nowrap; justify-content: space-between }
+      &-range-label { display: none }
+
+    }
+
+  }
+}
+
+/* mat stepper */
+.mat-step-label {
+
+  &, &-selected { font-size: inherit; text-transform : uppercase; }
+
+}
+
+/* mat-table */
+/*  TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version. */
+/*  TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version. */
+mat-table {
+
+  .mat-sort-header-container { box-sizing: border-box ; padding: .5rem; width: 100% }
+  .mat-sort-header-content { align-items: normal; flex-direction: column; width: 100% }
+
+  .mat-mdc-cell {
+
+    a[href^="/"] {
+      padding-left: 20px;
+      background: url('assets/img/Document.png') left center no-repeat;
+    }
+
+    a[href$=".docx"] {
+      background: url('assets/img/Word.png') left center no-repeat;
+    }
+
+    a[href$=".pdf"] {
+      background: url('assets/img/pdf.png') left center no-repeat;
+    }
+
+    a[href$=".mov"] {
+      background: url('assets/img/Movie.png') left center no-repeat;
+    }
+
+    a[href$=".mp4"] {
+      background: url('assets/img/Movie.png') left center no-repeat;
+    }
+
+    a[href$=".avi"] {
+      background: url('assets/img/Movie.png') left center no-repeat;
+    }
+
+    a[data-content$=".mp3"] {
+      background: url('assets/img/play-button.png') left center no-repeat;
+    }
+
+
+  }
+}
+
+.usic-table.mat-mdc-table {
+
+  .mat-mdc-row, mat-footer-row {
+    min-height: 44px !important;   /* material default is 48px */
+    &:last-of-type { @extend .border-bottom }
+  }
+
+}
+
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: mat.get-color-from-palette($usic-surface, "darker");
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  -webkit-text-size-adjust: 100%;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* flex classes */
+.flex {
+  display: flex!important;
+}
+
+.full-width { width: 100%; }
+
+.heading {
+  @extend .padding-top;
+}
+
+
+@media print {
+  .no-print {
+    display: none;
+  }
+}
+
+/* addons */
+.usic-cron-editor {
+  /*  TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version. */
+  /*  TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version. */
+  .mat-tab-label-active {
+    border: 1px solid #ccc; border-radius: 20px 20px 0 0; background-color: #efefef; opacity: .9 }
+
+  .mat-mdc-tab-body { @extend .bg-usic-surface-light, .border;
+    padding: 0 1rem;
+    border-top-width: 0; margin-bottom : 1rem; }
+
+  .mat-form-field-appearance-legacy {
+    /*  TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+    .mat-form-field-infix { @extend .border; padding-left : .5em; background-color: #fff }
+    /*  TODO(mdc-migration): The following rule targets internal classes of form-field that may no longer apply for the MDC version. */
+    .mat-form-field-underline { display: none }
+
+  }
+  /*  TODO(mdc-migration): The following rule targets internal classes of radio that may no longer apply for the MDC version. */
+  mat-radio-button { margin : 1rem!important; }
+  /*  TODO(mdc-migration): The following rule targets internal classes of radio that may no longer apply for the MDC version. */
+  /*  TODO(mdc-migration): The following rule targets internal classes of radio that may no longer apply for the MDC version. */
+  .mat-radio-label {
+    align-items: baseline;
+    /*  TODO(mdc-migration): The following rule targets internal classes of radio that may no longer apply for the MDC version. */
+    .mat-radio-container { transform: translateY(25%)}
+  }
+
+  .checkbox-margin { margin-bottom : 2rem!important }
+}
+
+/* Support new lines in tooltip text, and allow for wider tooltip boxes */
+.mdc-tooltip--shown .mdc-tooltip__surface  {
+  padding: .75em 1em;
+  font-weight: normal;
+  white-space: pre-line;
+  max-width: 50vw !important;
+}
+
+@media print {
+  .ticket-print-preview {
+    .dialog-header, .print-button  { display : none!important; }
+  }
+}
+
+.mdc-text-field__input::-webkit-calendar-picker-indicator {
+  display: block !important;
+}

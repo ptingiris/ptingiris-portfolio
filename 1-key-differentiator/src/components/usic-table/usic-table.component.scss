@@ -1,0 +1,126 @@
+.table-wrapper {
+  width: 100%;
+  overflow: auto;
+  /* enables sticky header row for over 10 data rows */
+  height: 548px;
+  &.page-size-0 { height: 98px }
+  &.page-size-1 { height: 144px }
+  &.page-size-2 { height: 190px }
+  &.page-size-3 { height: 236px }
+  &.page-size-4 { height: 282px }
+  &.page-size-5 { height: 326px }
+  &.page-size-25 { height: 1224px }
+}
+
+.selected { background-color: #ccc }
+
+.selected-indicator {
+  position : absolute;
+  transform: translateY( 25% );
+  /*padding : .25em 0 0 .5em;*/
+
+  & .more-icon:not(.visible) { visibility: hidden }
+}
+
+.show-selected { cursor: pointer }
+
+div.failed_icon {
+  display: inline-block;
+  position: relative;
+
+  span::before, span::after {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 70%;
+    left: 90%;
+    width: 50%;
+    height: 10%;
+    margin: -8% 0 0 -65%;
+    background: #f25c0f;
+    border-radius: 1px;
+  }
+
+  span::before {
+    transform: rotate(-45deg);
+  }
+
+  span::after {
+    transform: rotate(45deg);
+  }
+}
+
+
+/* TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version. */
+/* TODO(mdc-migration): The following rule targets internal classes of tabs that may no longer apply for the MDC version. */
+mat-table {
+  display: inline-flex;
+  flex-direction: column;
+
+  mat-header-row, mat-row, mat-footer-row {
+    align-items: stretch;
+
+    /* all cells */
+    mat-header-cell, mat-cell, mat-footer-cell {
+
+      box-sizing: border-box;
+      color: inherit;
+      flex: none;
+      overflow-x: auto;
+      padding : 0 1rem;
+      white-space: normal;
+      width: 240px;
+      &[hidden] { display: none }
+
+      /* checkbox column only */
+      &.mat-column-select { width: auto }
+    }
+
+  }
+
+  /* all header cells */
+  mat-header-row {
+    height: 84px;
+    mat-header-cell { height: 100% }
+    mat-header-cell:not(.mat-column-select) {
+      align-items: flex-start; padding : 0;
+      .resize-handle {
+        cursor: col-resize;
+        position : absolute; top : -.5rem; right : 0;
+        width: 4px; height: 100%;
+
+        &.left { /*background-color: blue; */left : -.5rem; } /* cursor: w-resize; */
+        &.right { /*background-color: red; */right : 0; } /* cursor: e-resize; */
+
+      }
+    }
+  }
+
+  mat-row:hover { background: #efefef; cursor : pointer; }
+
+  mat-cell.icon {
+    justify-content: center;
+    text-align: center;
+  }
+
+  mat-cell.numeric, mat-footer-cell.numeric {
+    justify-content: right;
+    text-align: right;
+  }
+
+}
+
+.page-count { color: rgba(0,0,0,.54); padding : .5rem 1rem; }
+
+table {
+  border-collapse: collapse;
+
+  th {
+    text-align: left;
+  }
+
+  td.numeric {
+    justify-content: right;
+    text-align: right;
+  }
+}

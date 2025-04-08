@@ -1,0 +1,52 @@
+<button mat-button color="warn"
+        *ngIf="parent.parentForm?.invalid && parent.parentForm?.dirty"
+        type="button"
+        (click)="parent.debug=!parent.debug"> {{ parent.debug ? 'Hide' : 'Show' }} Errors </button>
+
+
+<!-- disables if the parentForm hasn't changed or is invalid and
+     sets the button color to 'warn' if the parentForm is invalid -->
+<button mat-flat-button type="submit" 
+        [color]="parent.parentForm?.invalid ? 'warn' : 'accent'"
+        [disabled]="( parent.childForm || parent.dialogForm )?.pristine || ( parent.parentForm || parent.dialogForm )?.invalid || parent.submitBtnDisabled">
+
+  <ng-container *ngIf="parent.parentForm?.valid || parent.parentForm?.pristine; else formErrors">
+
+    {{ parent.submitButtonText }}
+
+  </ng-container>
+
+  <ng-template #formErrors>
+
+    <mat-icon matPrefix> error </mat-icon>
+    <span> Form Errors </span>
+
+    <!-- if there are form errors, display a list of the fields that are invalid -->
+    <div class="debug-panel" *ngIf="parent.debug" fxLayout="column">
+
+      <div class="title" fxFlex fxLayoutAlign="space-between center">
+        <h4 class="no-margin"> Form Errors</h4>
+        <mat-icon (click)="parent.debug=false"> close </mat-icon>
+      </div>
+
+      <ol class="mat-caption">
+        <li *ngFor="let ctrl of parent.findInvalidControls(parent.parentForm)">
+
+          <span class="text-usic-red titleized">{{ctrl | titleize}}</span>
+
+        </li>
+      </ol>
+    </div>
+
+  </ng-template>
+
+</button>
+
+<!-- additional custom buttons -->
+<ng-content></ng-content>
+
+<button mat-button mat-dialog-close="Canceled." (click)="parent.onCancel()">
+
+  {{ parent.cancelButtonText }}
+
+</button>

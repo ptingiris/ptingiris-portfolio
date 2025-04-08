@@ -1,0 +1,59 @@
+<div fxLayout="column" fxFlexFill>
+
+  <div> <ng-content></ng-content> </div>
+
+  <div class="table-map bg-usic-white" fxFlex fxLayout="row">
+
+    <div class="table-wrapper border-top">
+
+      <lib-usic-table #usicTable
+                      [displayedColumns]="displayedColumns"
+                      [jsonApiDataSource]="jsonApiDataSource"
+                      [filtering]="filterType"
+                      [expandFilters]="expandFilters"
+                      [provideExcelExport]="provideExcelExport"
+                      [selectByKey]="selectByKey"
+                      [selectByValue]="selectedTicketId"
+                      [editComponent]="editComponent"
+                      [cancelRefresh]="cancelRefresh"
+                      [dataSourceLoading]="dataSourceLoading"
+                      (changePage)="changePage.emit($event)"
+                      (changeSort)="changeSort.emit($event)"
+                      (openDialog)="openDialog.emit($event)"
+                      (clickCell)="clickCell.emit($event)"
+                      (clickRow)="clickRow.emit($event)"
+                      (dblClickRow)="dblClickRow.emit($event)"
+                      (createNew)="createNew.emit($event)"
+                      (deleteRecord)="deleteRecord.emit($event)"
+                      (changeColumns)="changeColumns.emit($event)"
+                      (cancelClicked)="cancelClicked.emit($event)"
+                      ></lib-usic-table>
+
+    </div>
+
+    <lib-usic-sidebar #mapSidebar
+                      sidebarName="map-table-sidebar"
+                      position="end"
+                      defaultWidth="40vw"
+                      helpText="Show/Hide Map"
+                      chevronRightIcon="arrow_circle_right"
+                      chevronLeftIcon="arrow_circle_left"
+                      [ignoreIcons]="true">
+
+      <div class="map-wrapper border-top">
+
+      <lib-here-map [locates]="displayedTickets"
+                    [selectByKey]="selectByKey"
+                    [selectByValue]="selectedTicketId"
+                    [disableShowAll]="disableShowAll"
+                    (clickMarker)="selectTicketById($event)"
+                    (hoverMarker)="selectTicketById($event)"
+                    ></lib-here-map>
+
+      </div>
+
+    </lib-usic-sidebar>
+
+  </div> <!-- .table-map -->
+
+</div>
