@@ -79,6 +79,6 @@ const skills = {
 
 I'm always open to discussing new opportunities, technical challenges, or innovative ideas. Please reach out through any of the following channels!
 
-- **Email**: [hello@pamtingiris.com](mailto:hello@pamtingiris.com)
+- **Email**: [pam@pamtingiris.com](mailto:pam@pamtingiris.com)
 - **LinkedIn**: [linkedin.com/in/pamtingiris](https://www.linkedin.com/in/pamtingiris/)
 - **GitHub**: [github.com/ptingiris](https://github.com/ptingiris)
