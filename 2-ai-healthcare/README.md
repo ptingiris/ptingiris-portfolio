@@ -83,6 +83,7 @@ Facing a previously failed implementation and significant technical debt, I impl
 ## Technical Details
 - [Leadership Case Study](./leadership-case-study.md)
 - [Technical Implementation Details](./technical-implementation.md)
+- [Developer Experience Case Study](./dev-experience-case-study.md)
 
 ## User Experience Considerations
 
