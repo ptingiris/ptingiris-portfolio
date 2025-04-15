@@ -115,5 +115,3 @@ This transformation effort revealed several critical insights:
 This case study demonstrates my ability to lead complex developer experience transformations in challenging environments. By addressing the fundamental workflow issues through a structured yet collaborative approach, I was able to rescue a stalled project, improve code quality, and establish sustainable processes for the development team.
 
 The strategic implementation of improved git workflows, CI/CD pipelines, and AI-enhanced testing tools directly addressed the root causes of the previous challenges, enabling successful project delivery and improving both developer satisfaction and code quality metrics.
-
-This experience directly relates to the Engineering Manager, Developer Experience role, where similar skills in process optimization, CI/CD implementation, and team leadership would be essential for success.
