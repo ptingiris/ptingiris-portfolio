@@ -1,4 +1,5 @@
-# Developer Experience Transformation: Rescuing a Healthcare SaaS Project with Process Engineering
+# AI-Enhanced Engineering Processes
+## Transforming Development Workflows with Process Engineering
 
 ## Executive Summary
 
@@ -14,13 +15,13 @@ When I joined the project, the organization was facing a perfect storm of develo
 - **Leadership Gap**: CTO and several senior developers had left or been fired
 
 ### Technical Challenges
-- **Unmanageable Technical Debt**: 
+- **Unmanageable Technical Debt**:
   - 90% of code lacked tests or documentation
   - Hundreds of unorganized bugs and support tickets
   - Daily production issues
 
 ### Process Challenges
-- **Inefficient Development Workflow**: 
+- **Inefficient Development Workflow**:
   - 90% of time spent on manual deployments or fixing deployment-related issues
   - No structured git branching strategy
   - No code review process
@@ -73,7 +74,7 @@ Created a comprehensive git workflow that addressed the previous ad-hoc approach
 ### Custom Development Framework
 Designed and implemented a structured approach:
 - **PLAN**: PM-driven assessment, requirements, designs, timeline
-- **BUILD**: Development phase with clear deliverables 
+- **BUILD**: Development phase with clear deliverables
 - **TEST**: QA-focused validation process
 - **RELEASE**: Customer Success-supported deployment
 
@@ -115,3 +116,7 @@ This transformation effort revealed several critical insights:
 This case study demonstrates my ability to lead complex developer experience transformations in challenging environments. By addressing the fundamental workflow issues through a structured yet collaborative approach, I was able to rescue a stalled project, improve code quality, and establish sustainable processes for the development team.
 
 The strategic implementation of improved git workflows, CI/CD pipelines, and AI-enhanced testing tools directly addressed the root causes of the previous challenges, enabling successful project delivery and improving both developer satisfaction and code quality metrics.
+
+## Related Case Studies
+- [AI Integration Architecture: Connecting Legacy Systems with Custom LLM](./ai-integration-architecture.md)
+- [AI Project Leadership: Turning Around a Stalled LLM Implementation](./ai-project-leadership.md)

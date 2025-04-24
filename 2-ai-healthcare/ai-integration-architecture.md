@@ -1,5 +1,5 @@
-# AI-Powered Letters of Medical Necessity
-## Technical Implementation Overview
+# AI Integration Architecture
+## Connecting Legacy Systems with Custom LLM Technology
 
 ## System Architecture
 
@@ -27,7 +27,7 @@ The project navigated a complex technical landscape:
 - **Rendering**: Modern Angular UI for document review and modification
 
 ### [Workflow Details](./images/lmn-cloud-architecture.jpg)
-1. **Recording**: 
+1. **Recording**:
    - Voice recording initiated in AngularJS interface
    - Audio data sent to legacy backend
 
@@ -171,3 +171,7 @@ The project navigated a complex technical landscape:
 - Demonstrated advanced Angular application architecture
 
 The project showcased how sophisticated AI integration can transform complex healthcare documentation processes, balancing cutting-edge technology with stringent compliance and usability requirements through a robust Angular framework implementation.
+
+## Related Case Studies
+- [AI Project Leadership: Turning Around a Stalled LLM Implementation](./ai-project-leadership.md)
+- [AI-Enhanced Engineering Processes: Transforming Development Workflows](./ai-enhanced-engineering-processes.md)

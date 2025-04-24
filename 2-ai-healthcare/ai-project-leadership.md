@@ -1,5 +1,5 @@
-# AI-Powered Letters of Medical Necessity
-## Leadership Case Study: Turning Around a Troubled Project
+# AI Project Leadership
+## Turning Around a Stalled LLM Implementation
 
 This case study examines how I successfully turned around a troubled healthcare AI integration project that was six months behind schedule, transforming it into a successful delivery that exceeded business expectations.
 
@@ -167,3 +167,7 @@ This project reinforced several key leadership principles:
 ## Conclusion
 
 The turnaround of the AI-Powered Letters of Medical Necessity project exemplifies how thoughtful leadership can transform a troubled initiative. By establishing clear direction, fostering collaboration, and implementing structured yet flexible processes, we overcame significant challenges to deliver a feature that exceeded business expectations and created value for healthcare practitioners and patients alike.
+
+## Related Case Studies
+- [AI Integration Architecture: Connecting Legacy Systems with Custom LLM](./ai-integration-architecture.md)
+- [AI-Enhanced Engineering Processes: Transforming Development Workflows](./ai-enhanced-engineering-processes.md)
