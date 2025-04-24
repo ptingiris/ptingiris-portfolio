@@ -1,4 +1,4 @@
-# Pam Tingris | Front-End Architect & AI Integration Specialist
+# Pam Tingiris | Front-End Engineering, User Experiences & Technical Project Management
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue)](https://www.linkedin.com/in/pamtingiris/)
 [![Email](https://img.shields.io/badge/Email-Contact-red)](mailto:ptingiris@gmail.com)
@@ -6,7 +6,7 @@
 
 ## About Me
 
-With 13+ years crafting elegant, user-centric digital experiences across diverse industries, I bring a unique combination of technical precision and design sensibility to every project. I specialize in the Angular ecosystem while maintaining versatile expertise across multiple frontend frameworks and design tools.
+With 13+ years crafting elegant, user-centric digital experiences across diverse industries, I bring a unique combination of technical precision and design sensibility to every project. My recent work specializes in the Angular ecosystem, however I bring a strong track record of versatile expertise across multiple frontend frameworks and design tools.
 
 My work transforms complex challenges into scalable, innovative solutions spanning healthcare systems, GPS tracking, video-based training platforms, and digital advertising. I excel in architecture design, technical leadership, and cross-functional collaboration to bring forward-thinking applications to life.
 
@@ -18,9 +18,9 @@ My work transforms complex challenges into scalable, innovative solutions spanni
 
 I recently led the successful turnaround of a complex AI implementation project in healthcare, integrating custom LLM technology with legacy systems. This showcase project demonstrates my expertise in:
 
-- **[AI Integration Architecture](./2-ai-healthcare/technical-implementation.md)**: Connecting legacy AngularJS systems with modern Angular frontends and custom LLM technology
-- **[AI Project Leadership](./2-ai-healthcare/leadership-case-study.md)**: Turning around a 6-month delayed project to deliver ahead of schedule
-- **[AI-Enhanced Engineering Processes](./2-ai-healthcare/dev-experience-case-study.md)**: Transforming development workflows with AI-powered testing and quality tools
+- **[AI Integration Architecture](./2-ai-healthcare/ai-integration-architecture.md)**: Connecting legacy AngularJS systems with modern Angular frontends and custom LLM technology
+- **[AI Project Leadership](./2-ai-healthcare/ai-project-leadership.md)**: Turning around a 6-month delayed project to deliver ahead of schedule
+- **[AI-Enhanced Engineering Processes](./2-ai-healthcare/ai-enhanced-engineering-processes.md)**: Transforming development workflows with AI-powered testing and quality tools
 
 ## 📑 Portfolio Projects
 
