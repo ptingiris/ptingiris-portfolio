@@ -1,8 +1,8 @@
 # Pam Tingiris | Front-End Engineering, User Experiences & Technical Project Management
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue)](https://www.linkedin.com/in/pamtingiris/)
-[![Email](https://img.shields.io/badge/Email-Contact-red)](mailto:ptingiris@gmail.com)
-[![GitHub](https://img.shields.io/badge/GitHub-Follow-lightgrey)](https://github.com/ptingiris)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/pamtingiris/)
+[![Email](https://img.shields.io/badge/Email-Contact-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:pam@pamtingiris.com)
+[![Portfolio](https://img.shields.io/badge/Portfolio-Visit-4285F4?style=for-the-badge&logo=google-chrome&logoColor=white)](https://www.pamtingiris.com)
 
 ## About Me
 
@@ -24,7 +24,7 @@ I recently led the successful turnaround of a complex AI implementation project 
 
 ## 📑 Portfolio Projects
 
-### [AI-Powered Letters of Medical Necessity (2024)](./2-ai-healthcare)
+### [AI-Powered Letters of Medical Necessity (2024-2025)](./2-ai-healthcare)
 Led cross-functional team implementing innovative AI solution integrating custom LLM with legacy AngularJS and modern Angular systems, turning around a 6-month delayed project to deliver ahead of schedule with 90%+ test coverage.
 
 ### [Enterprise Angular Component Library (2019-2023)](./1-key-differentiator)
@@ -46,7 +46,7 @@ Led a 20-person international team and managed $3M budget as Program Manager for
 
 ```javascript
 const skills = {
-  angular: ['Angular 8+', 'TypeScript', 'RxJS', 'NgRx'],
+  angularEcosystem: ['Angular 8+', 'TypeScript', 'RxJS', 'Angular Material'],
   reactEcosystem: ['React', 'Next.js', 'Tailwind CSS', 'Component Design'],
   frontend: ['HTML5', 'CSS3', 'JavaScript (ES6+)', 'Responsive Design'],
   architecture: ['Component Design Systems', 'Modular Development', 'State Management'],
